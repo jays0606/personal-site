@@ -1,0 +1,35 @@
+---
+title: MangstoonAI
+description: AI webtoon generator — turn your fantasy into a 22-panel webtoon starring yourself in under a minute.
+date: "2026-02-28"
+tags: [gemini, adk, hackathon, fastapi, next.js]
+featured: true
+link: https://github.com/jays0606/mangstoon_ai
+youtube: "https://youtu.be/L9gxk6dSrbw"
+award: "3rd Place — Google Gemini 3 Seoul Hackathon ($20K Credits)"
+---
+
+Solo entry against 111+ teams (max 4 per team). Built an AI webtoon generator that transforms a text story + selfie into a full 22-panel scroll-style webtoon.
+
+## How It Works
+
+1. Write your fantasy scenario and upload a selfie
+2. AI extracts your face features and generates a detailed storyboard
+3. All 22 panels generate in parallel — under 1 minute total
+4. Edit any panel with natural language instructions
+
+## Architecture
+
+- **Agent**: Google ADK with Gemini 3.1 Pro orchestrating the pipeline
+- **Storyboarding**: Gemini 3 Flash for fast, structured JSON storyboards
+- **Image Generation**: Gemini 3.1 Flash Image for 9:16 vertical panels
+- **Parallel Generation**: ThreadPoolExecutor (6 workers) + async queue streaming
+- **Backend**: FastAPI on Cloud Run (Seoul region)
+- **Frontend**: Next.js on Vercel with SSE real-time panel streaming
+- **Storage**: Google Cloud Storage for panel images
+
+## Key Technical Decisions
+
+- **2-step prompt pipeline**: Flash optimizes the prompt before Image generates — much better quality
+- **Face/outfit separation**: Permanent face description + per-panel outfit for character consistency
+- **Language detection**: Auto-detects Korean/Japanese/English, ensures all in-image text matches

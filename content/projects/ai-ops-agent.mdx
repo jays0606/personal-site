@@ -1,0 +1,24 @@
+---
+title: AI Operations Agent
+description: Autonomous Slack bot integrating Jira, PostgreSQL, GitHub, Sentry via MCP — used daily by 15+ engineers.
+date: "2025-12-01"
+tags: [claude, mcp, slack, agents, internal-tools]
+featured: true
+---
+
+Built an autonomous AI operations agent for Mindlogic's engineering team. Non-developers can now query databases, create Jira tickets, check Sentry errors, and search code — all through natural Slack conversations.
+
+## Capabilities
+
+- **Database queries**: Natural language to SQL across production PostgreSQL
+- **Jira operations**: Create, update, search tickets without leaving Slack
+- **GitHub integration**: Code search, PR summaries, deployment status
+- **Sentry debugging**: Error triage, stack trace analysis, impact assessment
+- **AWS monitoring**: Service health checks, log queries
+
+## Architecture
+
+- Built on Claude with MCP (Model Context Protocol) for multi-service orchestration
+- Custom skill routing system for domain-specific capabilities
+- Multi-tier memory system (global, daily, per-user) for cross-session learning
+- Plugin architecture (mindlogic-plugins) extending Claude Code capabilities

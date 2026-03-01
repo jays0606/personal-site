@@ -1,0 +1,197 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --color-slate-925: #0a101f;
+  --color-cyan-glow: #22d3ee;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-slate-925);
+  color: #94a3b8;
+  font-family: var(--font-body);
+}
+
+::selection {
+  background: rgba(34, 211, 238, 0.2);
+  color: #e2e8f0;
+}
+
+/* Mouse-following radial gradient spotlight */
+.spotlight {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  transition: background 0.3s ease;
+}
+
+/* Section heading style */
+.section-heading {
+  font-family: var(--font-display);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #e2e8f0;
+}
+
+/* Nav link active indicator */
+.nav-indicator {
+  width: 2rem;
+  height: 1px;
+  background: #475569;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover .nav-indicator,
+.nav-link.active .nav-indicator {
+  width: 4rem;
+  background: #e2e8f0;
+}
+
+.nav-link:hover .nav-label,
+.nav-link.active .nav-label {
+  color: #e2e8f0;
+}
+
+/* Card hover glow */
+.card-hover {
+  position: relative;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.card-hover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 0.5rem;
+  opacity: 0;
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.05), rgba(56, 189, 248, 0.02));
+  transition: opacity 0.3s ease;
+}
+
+.card-hover:hover::before {
+  opacity: 1;
+}
+
+.card-hover:hover {
+  background: rgba(30, 41, 59, 0.5);
+}
+
+/* Tech pill */
+.tech-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.625rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.5;
+  background: rgba(34, 211, 238, 0.1);
+  color: #22d3ee;
+}
+
+/* Award badge */
+.award-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.125rem 0.625rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(251, 191, 36, 0.12);
+  color: #fbbf24;
+}
+
+/* Prose overrides for dark theme */
+.prose {
+  --tw-prose-body: #94a3b8;
+  --tw-prose-headings: #e2e8f0;
+  --tw-prose-links: #22d3ee;
+  --tw-prose-bold: #e2e8f0;
+  --tw-prose-bullets: #475569;
+  --tw-prose-quotes: #cbd5e1;
+  --tw-prose-code: #e2e8f0;
+  --tw-prose-hr: #1e293b;
+  --tw-prose-th-borders: #1e293b;
+}
+
+/* Animate in */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+/* Staggered delays */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+/* ─── Bento Grid ─── */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 1023px) {
+  .bento-grid {
+    grid-template-columns: repeat(8, 1fr);
+  }
+}
+
+@media (max-width: 639px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Scroll-triggered fade in */
+.bento-card-animate {
+  opacity: 0;
+  transform: translateY(0.5rem);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.bento-card-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Spotlight project card shimmer on award badge */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.award-shimmer {
+  background: linear-gradient(90deg, #fbbf24, #f59e0b, #fbbf24, #f59e0b);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3s linear infinite;
+}
