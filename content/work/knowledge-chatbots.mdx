@@ -1,0 +1,20 @@
+---
+title: Expert-corpus chatbots
+summary: Chatbots that answer from an expert's actual books and lectures and cite the page or the timestamp. No vector database. Built twice now, for a meditation professor and a pilates studio.
+date: "2026-08-04"
+period: "2026"
+track: build
+status: "two client instances"
+---
+
+## The pattern
+
+Each document gets a tree: sections, summaries, page ranges. Video lectures get transcribed and cut into four-minute blocks. An agent searches the trees with BM25, reads the pages it chooses, and answers with citation tokens that the front end turns into links — to the page image, or to the exact second of the lecture. It's the PageIndex approach: the model navigates a table of contents instead of being handed embedding neighbours, so the citations are real.
+
+## 몸톡
+
+For a pilates studio whose faculty come from dance anatomy: six textbooks (642 pages) and seventeen Korean lecture videos (about twelve and a half hours) — 836 citable units. The system prompt takes an explicit stance against studio folklore: forced turnout from the knee, ballistic stretching, weight rules for growing dancers. The audience is anatomy and dance students, young dancers, and the teachers who were taught the folklore.
+
+## What I learned about models
+
+For an agent loop, a fast model that takes seventeen seconds a round beats a strong one that takes a hundred and seventy. Gemini Flash runs these; the Pro preview was unusable for conversation.

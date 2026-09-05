@@ -1,0 +1,27 @@
+---
+title: Jarvis
+summary: An autonomous Slack agent that lets anyone at MindLogic debug a customer issue, query production, or file a ticket in plain language. Company-wide since December 2025.
+date: "2025-12-01"
+period: "2025 — now"
+track: work
+status: "in daily use across engineering, CS, and product"
+featured: true
+order: 3
+---
+
+## What it does
+
+Someone in customer success types "why is the SNU tenant's chatbot returning empty answers since this morning" into Slack. Jarvis reads the Sentry errors, queries the production database, checks the last deploy on GitHub, explains what changed, and offers to open the Jira ticket. Nobody left Slack, and nobody had to know SQL.
+
+## How it's built
+
+- Claude Agent SDK, with each company system exposed as an MCP server: Jira, PostgreSQL, GitHub, Sentry, AWS, Slack itself.
+- A skill router that picks domain-specific behaviour (database triage reads differently from ticket creation).
+- Three tiers of memory — global, daily, per-user — so it learns naming conventions, recurring incidents, and who owns what.
+- A plugin layer (`mindlogic-plugins`) that also extends Claude Code for the engineers, so the Slack agent and the coding agent share tools and context.
+
+## Why it matters
+
+It was the first thing that made the company AI-native rather than AI-equipped. Handing everyone a chat subscription changes individual productivity a little. Wiring the agent into the systems where the work already lives changes how the organisation operates. I gave a talk on that distinction at KT Cloud to about two hundred people; Jarvis was the evidence.
+
+It is also the pattern behind [가게봇](/work/gagebot) and the agent pilots I now run for small companies: an agent that knows the company's context, embedded in the tools the company already uses.

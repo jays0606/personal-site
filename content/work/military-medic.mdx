@@ -1,0 +1,22 @@
+---
+title: military-medic
+summary: A voice agent for field medics that runs entirely on the device — Gemma 4 for reasoning, local speech in and out, no network. Built at the Gemma 4 Voice Agents Hackathon at YC.
+date: "2026-04-18"
+period: "Apr 2026"
+track: hack
+status: "Cactus × Google DeepMind, YC HQ, San Francisco"
+featured: true
+order: 6
+---
+
+## The premise
+
+A medic in a combat zone has no connectivity and no free hands. The agent listens, asks the triage questions in order, and speaks the protocol back — tourniquet placement, dose by weight, when to move — with nothing leaving the device.
+
+## What made it hard
+
+Everything on-device means a small model, a small speech stack, and a strict latency budget on a phone. The work was in the tool schema: a handful of functions (vitals, injury classification, protocol lookup, timers) with tight enough descriptions that a 4-billion-parameter model calls the right one, and a conversation loop that tolerates being interrupted.
+
+## Why I flew for it
+
+The hackathon was at Y Combinator's office, run by a YC company with DeepMind. I wanted to see the room. The prize was a guaranteed YC interview; I didn't win it, and the trip was worth it anyway.

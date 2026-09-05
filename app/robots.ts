@@ -1,12 +1,9 @@
 import type { MetadataRoute } from "next";
+import { BASE_URL } from "@/lib/site";
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: {
-      userAgent: "*",
-      allow: "/",
-      disallow: "/resume",
-    },
-    sitemap: "https://jaehoshin.com/sitemap.xml",
+    rules: { userAgent: "*", allow: "/", disallow: ["/resume", "/file"] },
+    sitemap: `${BASE_URL}/sitemap.xml`,
   };
 }

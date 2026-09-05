@@ -1,49 +1,46 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Sans, JetBrains_Mono, Outfit } from "next/font/google";
+import { Fraunces, Hanken_Grotesk, Nanum_Myeongjo, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-const outfit = Outfit({ subsets: ["latin"], variable: "--font-display", weight: ["400", "500", "600", "700", "800"] });
-const ibmPlexSans = IBM_Plex_Sans({ subsets: ["latin"], variable: "--font-body", weight: ["300", "400", "500", "600"] });
-const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-display",
+  axes: ["opsz", "SOFT", "WONK"],
+  display: "swap",
+});
+const hanken = Hanken_Grotesk({ subsets: ["latin"], variable: "--font-body", display: "swap" });
+const nanum = Nanum_Myeongjo({ weight: ["400", "700"], subsets: ["latin"], variable: "--font-kr", display: "swap" });
+const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
 
-const BASE_URL = "https://jaehoshin.com";
+export const BASE_URL = "https://jaehoshin.com";
+
+const TITLE = "Jaeho Shin";
+const DESCRIPTION =
+  "One engineer, one GPU, and a lot of agents. Director of Engineering at MindLogic in Seoul; builds AI media, apps, and agents as VibeRick. A dated record of what shipped.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: {
-    default: "Jaeho Shin — Engineering Director",
-    template: "%s | Jaeho Shin",
-  },
-  description: "Engineering Director @ Mindlogic. I build AI products that ship — from hackathon prototypes to platforms serving 50+ enterprise clients.",
-  keywords: ["Jaeho Shin", "AI Engineer", "Engineering Director", "Mindlogic", "Claude Code", "Google ADK", "MCP", "LLMs", "Full Stack", "Seoul"],
+  title: { default: TITLE, template: "%s — Jaeho Shin" },
+  description: DESCRIPTION,
+  keywords: ["Jaeho Shin", "신재호", "AI engineer", "MindLogic", "VibeRick", "Claude Code", "MCP", "Gemini", "Seoul", "agents"],
   authors: [{ name: "Jaeho Shin", url: BASE_URL }],
   creator: "Jaeho Shin",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: BASE_URL,
-    siteName: "Jaeho Shin",
-    title: "Jaeho Shin — Engineering Director",
-    description: "Engineering Director @ Mindlogic. I ship AI that works — not demos.",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Jaeho Shin — Engineering Director" }],
+    siteName: TITLE,
+    title: TITLE,
+    description: DESCRIPTION,
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Jaeho Shin — Engineering Director",
-    description: "Engineering Director @ Mindlogic. I ship AI that works — not demos.",
-    images: ["/og-image.png"],
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: { index: true, follow: true, "max-video-preview": -1, "max-image-preview": "large", "max-snippet": -1 },
-  },
+  twitter: { card: "summary_large_image", title: TITLE, description: DESCRIPTION },
+  robots: { index: true, follow: true },
   alternates: { canonical: BASE_URL },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${outfit.variable} ${ibmPlexSans.variable} ${jetbrainsMono.variable}`}>
+    <html lang="en" className={`${fraunces.variable} ${hanken.variable} ${nanum.variable} ${geistMono.variable}`}>
       <head>
         <script
           type="application/ld+json"
@@ -52,23 +49,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               "@context": "https://schema.org",
               "@type": "Person",
               name: "Jaeho Shin",
+              alternateName: "신재호",
               url: BASE_URL,
-              image: `${BASE_URL}/profile-hero.jpg`,
-              jobTitle: "Engineering Director",
-              worksFor: { "@type": "Organization", name: "Mindlogic Inc.", url: "https://mindlogic.ai" },
+              image: `${BASE_URL}/portrait.jpg`,
+              jobTitle: "Director of Engineering",
+              worksFor: { "@type": "Organization", name: "MindLogic", url: "https://mindlogic.ai" },
               alumniOf: { "@type": "CollegeOrUniversity", name: "Yonsei University" },
-              knowsAbout: ["Artificial Intelligence", "Large Language Models", "Claude Code", "Google ADK", "MCP", "Full Stack Development"],
-              sameAs: [
-                "https://github.com/jays0606",
-                "https://linkedin.com/in/jays0606",
-              ],
+              knowsLanguage: ["ko", "en", "zh"],
+              knowsAbout: ["AI agents", "Large language models", "MCP", "Claude Code", "Gemini", "Text to speech", "Video generation"],
+              sameAs: ["https://github.com/jays0606", "https://linkedin.com/in/jays0606"],
             }),
           }}
         />
       </head>
-      <body className="min-h-screen antialiased">
-        {children}
-      </body>
+      <body className="min-h-screen">{children}</body>
     </html>
   );
 }

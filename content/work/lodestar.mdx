@@ -1,0 +1,18 @@
+---
+title: Lodestar
+summary: A Western-astrology app whose AI astrologer cites your actual chart — "using your Capricorn midheaven and tenth-house Saturn" — instead of a horoscope column. Working prototype.
+date: "2026-05-15"
+period: "May 2026"
+track: build
+status: "prototype, not in a store"
+---
+
+## The idea
+
+Three things missing from every astrology app: a journaling loop keyed to today's transits against *your* chart, with old entries resurfacing when the same transit returns; an AI that grounds every sentence in a verifiable placement; and, later, a couples mode that tracks composite transits.
+
+## What exists
+
+Swiss Ephemeris (`pyswisseph`) for natal charts and transits, so the math is real. Gemini Flash with minimal thinking for the words, verified to cite real placements. FastAPI with nineteen endpoints; Postgres; Expo Router on the phone; streaming answers over SSE; city autocomplete via Open-Meteo; account deletion and a GDPR export. Apple and Google sign-in are wired on the client and wait on a developer account and a native build.
+
+A sibling app for the Korean market — 사주, the same shape with a different engine — is at the same stage.

@@ -1,0 +1,18 @@
+---
+title: World Explorer
+summary: A voice-only 3D globe for children. Say a country; the globe flies there, a local friend appears, and the AI runs the whole scene through tool calls. Built for the Gemini Live Agent Challenge.
+date: "2026-03-10"
+period: "Mar 2026"
+track: hack
+status: "Gemini Live Agent Challenge entry"
+---
+
+## What it does
+
+A child says "Japan!" The low-poly globe spins and lands; cherry blossoms start falling; Yuki appears and teaches "konnichiwa" and why Mount Fuji matters. Collect a souvenir, fly on. There is no text box and nothing to read — a four-year-old and a ten-year-old both work, because the prompt adapts vocabulary to the age it hears.
+
+## How it's built
+
+Gemini Live API with native audio streaming over a WebSocket: 16 kHz PCM in from an AudioWorklet, 24 kHz out, natural barge-in. The model controls the interface through ten tools — fly to country, spawn character, change atmosphere, generate a watercolour illustration (Gemini 3.1 Flash Image), play one of fifteen ambient sounds, offer story choices. Three.js renders the globe and particles; React 19 wraps it as a PWA. Between sessions, Flash summarises what happened into a child profile, so a returning kid hears "remember when we visited Seoul?"
+
+It responds in whichever language the child speaks.

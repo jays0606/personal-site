@@ -1,0 +1,30 @@
+---
+title: content-factory
+summary: A zero-touch pipeline that turns a topic into a finished Korean long-form YouTube episode for about three dollars, on a single RTX 5090 in my apartment.
+date: "2026-06-03"
+period: "Aug 2025 — now"
+track: build
+status: "221 episodes, 14 channels, 3 terminated, relaunching as 3"
+featured: true
+order: 2
+---
+
+## What it is
+
+Eight stages, each a Python module, each idempotent, all driven by a Postgres job table: topic → script → metadata → thumbnail → stills → image-to-video → speech → forced-aligned subtitles → assembly. A batch run renders an episode of forty to ninety minutes with sixty to a hundred and sixty AI stills, LTX-2.3 motion on each, an OmniVoice narrator, and byte-exact subtitles, then drops it in Drive for upload. Cost per episode is roughly three dollars in API calls; the GPU is already paid for.
+
+Channels are YAML files: voice, pacing, style anchor, title template. Fourteen exist — Bible readings, Buddhist stories, Joseon history, Stoicism, feng shui, world mythology, psychology.
+
+## The box
+
+Ubuntu, Ryzen 9 9950X, one RTX 5090 with 32 GB. Three tenants share the card at once: ComfyUI rendering video at ~19 GB, OmniVoice TTS at ~6 GB, and a Korean STT service at ~6 GB. I measured what governs render speed and it turned out to be ComfyUI's `--reserve-vram` flag, not which services were up. Setting it to 12 while co-tenants held 20 GB left the renderer 0.6 GB for a 28 GB model; it streamed weights every step and ran at 56 seconds a clip. Setting it to 3 gave 34. That mistake cost the first 195 episodes about a third of their render time. Everything I learn like that goes into a `CLAUDE.md` on the box so the next agent doesn't repeat it.
+
+## What went wrong
+
+In August 2026 YouTube terminated three of the channels for mass-produced content. They were right. The thesis was volume; every channel I studied that actually grew was either low-volume and distinctive or daily but *branded* — a named narrator in every title, a sources section, a consistent world. Anonymous TTS on a fixed template at daily cadence is not a tuning problem, it's the design.
+
+The relaunch, in progress: three channels, a named synthetic narrator with a face on the thumbnail, an anti-slop pass on every script (sources, credits, an AI label), three uploads per render (main, compilation, audio-only), and — before any of it — an upload stage and a daily metrics pull. The pipeline had no measurement loop at all. You cannot iterate on what you don't measure.
+
+## Predecessor
+
+The first version (August 2025) was a Mac script driving Gemini, CosyVoice on a rented GPU, and FFmpeg across twenty channels. Seven of them reached monetisation. It's retired; ninety-seven gigabytes of its output are still on my laptop.

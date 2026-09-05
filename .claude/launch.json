@@ -1,0 +1,6 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    { "name": "personal-site", "runtimeExecutable": "npm", "runtimeArgs": ["run", "dev"], "port": 3000, "cwd": "/Users/jaehoshin/Code/personal/personal-site" }
+  ]
+}

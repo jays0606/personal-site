@@ -42,3 +42,7 @@ next-env.d.ts
 # screenshots & playwright artifacts
 docs/screenshots/
 .playwright-mcp/
+
+# local agent state
+.omc/
+.playwright-mcp/

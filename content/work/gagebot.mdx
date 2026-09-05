@@ -1,0 +1,27 @@
+---
+title: 가게봇
+summary: A chatbot any small business installs by pasting one script tag into its website. Answers only from the shop's own FAQ, escalates the rest, runs on Cloud Run.
+date: "2026-07-19"
+period: "Jul 2026 — now"
+track: build
+status: "live, five shops, one paying"
+featured: true
+order: 4
+---
+
+## What it does
+
+A guesthouse owner pastes `<script src="…/widget.js" data-tenant="…">` into their site. Guests get a chat bubble that answers check-in times, parking, and the pet policy in whatever language they ask in — and when it doesn't know, it says so and collects the question for the owner instead of guessing. Owners get a dashboard with every conversation, FAQ import from a spreadsheet, a QR code for the counter, and a plain-language editor: "change the checkout time to 11" updates the FAQ.
+
+## How it's built
+
+- FastAPI, Tortoise ORM, pydantic-ai over Gemini Flash, streaming over SSE with three-day session reuse and rate limits.
+- A platform-owned prompt frame the tenant can't break: answer only from FAQs, refuse and escalate otherwise, reply in the user's language, plain text.
+- Next.js for the widget loader, the owner accounts, and the public shop pages.
+- Two Cloud Run services and a small Cloud SQL instance in Seoul. The whole thing was built and verified end to end — including the widget pasted into a raw `file://` page — in a weekend.
+
+## Who uses it
+
+A music studio, a lifestyle shop, a friend's finance site, a research institute's support line, and a guesthouse. One signed contract so far. Kakao channel integration and custom domains are the next two asks; both are deferred until more than one customer wants them.
+
+This is the [Jarvis](/work/jarvis) idea at its smallest: an agent that knows *this* business, living where the customers already are.

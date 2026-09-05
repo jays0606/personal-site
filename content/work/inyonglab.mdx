@@ -1,0 +1,21 @@
+---
+title: 인용랩
+summary: Measuring whether AI search engines cite a business, in Korean, where no Western tool looks. An audit script, a citation tracker, and two clinic engagements under medical-advertising law.
+date: "2026-08-05"
+period: "Aug 2026 — now"
+track: build
+status: "two engagements"
+---
+
+## The finding that started it
+
+AI search is four different indexes. ChatGPT reads Bing; Claude reads Brave; Gemini reads Google with query fan-out that overlaps ordinary rankings only 14% of the time; Perplexity crawls its own. One optimisation does not cover them. And none of the tools that sell "AI visibility" — Profound, Peec, Otterly, Ahrefs — track Naver's AI Briefing or Korean prompts. Korean citation data does not exist. If you make it, you are the authority.
+
+## The tools
+
+- `ai_readiness_audit.py` scores a site 0–100 on what an AI crawler actually sees: server-side rendering, question-form headings, schema, and which of nine AI bots `robots.txt` admits. A well-known dermatology clinic scored zero — fully client-rendered, three words of body text. That result is the sales deck.
+- `citation_tracker.py` measures brand mention and citation rates across engines, and refuses to run fewer than three trials per prompt, because one LLM answer proves nothing.
+
+## The constraint that is the product
+
+Korean medical law bans most advertising, requires pre-review, and makes "leave a review for a discount" a criminal offence — which is also standard practice in the industry. Saying that out loud to a clinic is the trust signal. The document listing what *cannot* be sold is the most valuable file in the repo.

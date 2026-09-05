@@ -1,0 +1,28 @@
+---
+title: Voice lab
+summary: A self-hosted text-to-speech service with 72 Korean and English voices, one designed-from-scratch synthetic narrator, and a public API. It narrates the video factory and reads meditations in the user's own voice.
+date: "2026-08-16"
+period: "2025 — now"
+track: build
+status: "live at tts.viberick.com"
+featured: true
+order: 5
+---
+
+## The service
+
+OmniVoice (k2-fsa) running as a FastAPI service on the GPU box, behind a Cloudflare tunnel. `POST /synthesize` returns a job id; poll it; fetch the audio. Two seconds to synthesise twelve seconds of Korean speech *while the same card is rendering video at 100%*. It replaced CosyVoice3 on a rented GCP instance, which was slower, remote, and spoke a different API.
+
+Seventy-two voices: thirty Gemini prebuilt voices cloned into Korean, a dozen reference clones, and thirty English variants. I measured every voice's fundamental frequency and spread, which is how I found that the one documented as "deep male" was a 171 Hz reference mislabeled by whoever cut it.
+
+## Pacing
+
+The knobs that matter are `speed`, `min_pause`, and `scene_gap`, not the `silence_duration` that the old engine used. Measured on a 64-second read: slowing `speed` from 1.0 to 0.9 adds 4.2 seconds and stretches the voice; widening `min_pause` adds 9.0 seconds by splicing silence into pauses that already exist, leaving the voice untouched. So the sleep-lane channels slow down with pauses, not speed.
+
+## 서하 — a voice that belongs to no one
+
+Cloning a real person's voice for a YouTube narrator is a publicity-rights problem and, increasingly, a platform-strike problem. So I designed one. OmniVoice's voice-design mode takes a small whitelist of descriptors — gender, age, pitch, accent — and produces random takes. I generated many, picked the one with the delivery I wanted, and locked that take as a clone reference. Design, lock, clone. `seoha_v1` is versioned so a retune becomes `v2` without breaking anything that calls her. She has a face too, built with an identity-locked image recipe, and will be the factory's named narrator.
+
+## Where it's used
+
+The [video factory](/work/content-factory), the INZEUM meditation app's "내 목소리" feature (the user's own voice reading the practice back), and a quick `tts "텍스트"` helper on my laptop for anything else.

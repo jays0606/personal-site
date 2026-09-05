@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "nodejs";
-export const alt = "Jaeho Shin — Engineering Director";
+export const alt = "Jaeho Shin — one engineer, one GPU, and a lot of agents.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -10,72 +10,44 @@ export default function OGImage() {
     (
       <div
         style={{
-          background: "linear-gradient(135deg, #0a101f 0%, #0f172a 50%, #0a101f 100%)",
+          background: "#F2F3F1",
           width: "100%",
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
-          padding: "80px",
-          fontFamily: "system-ui, sans-serif",
+          justifyContent: "space-between",
+          padding: "72px 80px",
+          fontFamily: "Georgia, 'Times New Roman', serif",
+          color: "#15171A",
         }}
       >
-        <div
-          style={{
-            fontSize: 64,
-            fontWeight: 800,
-            color: "#e2e8f0",
-            lineHeight: 1.1,
-            marginBottom: 16,
-          }}
-        >
-          Jaeho Shin
+        <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
+          <div
+            style={{
+              width: 44,
+              height: 44,
+              background: "#C2362B",
+              color: "#fff",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: 26,
+              borderRadius: 3,
+              boxShadow: "inset 0 0 0 2px rgba(255,255,255,0.55), inset 0 0 0 4px #C2362B",
+            }}
+          >
+            申
+          </div>
+          <div style={{ fontSize: 30 }}>Jaeho Shin</div>
         </div>
-        <div
-          style={{
-            fontSize: 28,
-            fontWeight: 500,
-            color: "#22d3ee",
-            marginBottom: 32,
-          }}
-        >
-          Engineering Director @ Mindlogic
+        <div style={{ fontSize: 76, lineHeight: 1.02, letterSpacing: -2, maxWidth: 980 }}>
+          One engineer, one GPU, and a lot of agents.
         </div>
-        <div
-          style={{
-            fontSize: 22,
-            color: "#94a3b8",
-            lineHeight: 1.5,
-            maxWidth: 700,
-          }}
-        >
-          I ship AI that works — not demos. From hackathon prototypes to platforms serving 50+ enterprise clients.
-        </div>
-        <div
-          style={{
-            display: "flex",
-            gap: 12,
-            marginTop: 40,
-          }}
-        >
-          {["LLMs", "Claude Code", "Google ADK", "MCP", "Agents"].map((kw) => (
-            <div
-              key={kw}
-              style={{
-                background: "rgba(34, 211, 238, 0.1)",
-                color: "#22d3ee",
-                padding: "6px 16px",
-                borderRadius: 9999,
-                fontSize: 16,
-                fontWeight: 500,
-              }}
-            >
-              {kw}
-            </div>
-          ))}
+        <div style={{ fontSize: 24, color: "#5B5F66", fontFamily: "Helvetica, Arial, sans-serif" }}>
+          Seoul. A dated record of what shipped, 2017 to now.
         </div>
       </div>
     ),
-    { ...size }
+    { ...size },
   );
 }

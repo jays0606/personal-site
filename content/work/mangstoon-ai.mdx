@@ -1,0 +1,35 @@
+---
+title: MangstoonAI
+summary: A selfie and a sentence become a 22-panel webtoon starring you, in under a minute. Third place, solo, at the Gemini 3 Seoul Hackathon.
+date: "2026-02-28"
+period: "Feb 2026"
+track: hack
+status: "3rd of 111 teams, $20K in Google Cloud credits"
+featured: true
+order: 1
+link: https://github.com/jays0606/mangstoon_ai
+youtube: "https://youtu.be/L9gxk6dSrbw"
+award: "3rd place — Google Gemini 3 Seoul Hackathon, February 28, 2026. Solo entry against 111 teams of up to four, from about 1,500 applicants."
+image: /mangstoon-thumb.jpg
+---
+
+## What it does
+
+You write a fantasy — "I get drafted into a K-pop group by accident" — and upload one photo. Seven hours after I sat down at the venue, the demo was turning that into a scroll-style webtoon: 22 vertical panels, consistent face, consistent outfit per scene, dialogue in whatever language you typed. Any panel can be edited afterwards with a sentence.
+
+## How it works
+
+1. Gemini 3 Flash reads the story and the face description and writes a structured storyboard as JSON: panel, shot, expression, outfit, dialogue.
+2. A second Flash pass rewrites each panel's prompt for the image model. This two-step prompt pipeline was the single biggest quality jump of the day.
+3. Gemini 3.1 Flash Image renders all 22 panels in parallel (six workers over an async queue), streamed to the browser over server-sent events as they finish.
+4. The face description is permanent and the outfit description is per-scene, so the character stays the same person while the clothes change.
+
+Google ADK orchestrates the agent; FastAPI on Cloud Run (Seoul) serves it; Next.js on Vercel renders the scroll; panels land in Cloud Storage.
+
+## What I took from it
+
+- Prompt-optimise before you generate. A cheap model rewriting the prompt beats a strong model guessing.
+- Separate what must stay constant from what must change, and say so explicitly in every prompt.
+- Ship the streaming UI first. Judges watched panels appear one by one; that was the demo.
+
+The portrait on the home page flips to a webtoon rendering of the same photo. That's this pipeline's descendant.
